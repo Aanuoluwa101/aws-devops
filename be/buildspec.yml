@@ -15,12 +15,12 @@ phases:
       - npm run build
       - echo "Build complete."
 
-  post_build:
-    commands:
-      - echo "Zipping deployment package..."
-      - cd ./be
-      - zip -r deployment.zip . 
-artifacts:
-  files:
-    - deployment.zip
+#   post_build:
+#     commands:
+#       - echo "Zipping deployment package..."
+#       - cd ./be
+#       - zip -r deployment.zip . 
+# artifacts:
+#   files:
+#     - deployment.zip
 
