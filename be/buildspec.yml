@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - cd ./be
+      - npm install -g typescript  
+      - npm install 
+
+  build:
+    commands:
+      - echo "Building the TypeScript application..."
+      - cd ./be
+      - npm run build
+      - echo "Build complete."
+
+  post_build:
+    commands:
+      - echo "Zipping deployment package..."
+      - zip -r deployment.zip .  # Archive the built files
+      - echo "Uploading deployment package to S3..."
+      - aws s3 cp deployment.zip s3://YOUR_S3_BUCKET/deployment.zip  # Replace with your S3 bucket
+      - echo "Triggering CodeDeploy..."
+      - aws deploy create-deployment \
+          --application-name YOUR_CODEDEPLOY_APP \
+          --deployment-group-name YOUR_DEPLOYMENT_GROUP \
+          --s3-location bucket=YOUR_S3_BUCKET,key=deployment.zip,bundleType=zip
+
+artifacts:
+  files:
+    - deployment.zip
+  discard-paths: yes
