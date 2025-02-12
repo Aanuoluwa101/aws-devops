@@ -2,7 +2,7 @@ import express from 'express'
 import userRouter from './routes/users'
 
 const app = express();
-const PORT = 8000;
+const PORT = 8001;
 
 app.use("/api/users", userRouter)
 

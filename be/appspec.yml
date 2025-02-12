@@ -2,7 +2,7 @@ version: 0.0
 os: linux  
 
 files:
-  - source: /be
+  - source: /
     destination: /home/ubuntu/deadlinr
     file_exists_behavior: OVERWRITE
 
